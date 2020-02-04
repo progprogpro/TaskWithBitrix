@@ -11,7 +11,3 @@ Route::group([ 'prefix'=>'autoria', 'as' => 'autoria.', 'namespace' => 'Autoria'
     Route::get('models', 'AutoriaController@models')->name('models');
 });
 
-Route::group([ 'prefix'=>'bitrix', 'as' => 'bitrix.', 'namespace' => 'Bitrix' ], function() {
-    Route::get('oauth', 'AuthBitrixController@auth')->name('auth');
-    Route::get('addLead', 'RequestBitrixController@addLead')->name('addLead');
-});

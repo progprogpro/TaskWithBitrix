@@ -8,8 +8,10 @@ return [
         'auto_models_url' => env('AUTORIA_AUTO_MODELS_URL','AUTO_MODELS_URL'),
     ],
     'bitrix' => [
-        'client_id' => env('BITRIX_CLIENT_ID','CLIENT_ID'),
-        'client_secret' => env('BITRIX_CLIENT_SECRET','CLIENT_SECRET'),
-        'api_url' => env('BITRIX_API_URL','API_URL'),
+        'incomeHookUrl' => env('BITRIX_INCOME_HOOK_URL','INCOME_HOOK_URL'),
+        'methods' => [
+            'addLead' => 'crm.lead.add.json',
+            'deleteLead' => 'crm.lead.delete.json'
+        ]
     ]
 ];

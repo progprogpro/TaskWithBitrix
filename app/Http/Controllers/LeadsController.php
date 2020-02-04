@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Bitrix\Leads;
+use App\Events\Bitrix\OnAddLead;
 use App\Http\Requests\SaveLeadRequest;
 use App\Lead;
 use Illuminate\Http\Request;
@@ -51,6 +53,14 @@ class LeadsController extends Controller
                 'car_category',
                 'car_model'
             ])->toArray());
+
+        $data = [
+            'title' => $validated->get('lead_name') . " add a car:" . $validated->get('car_mark') . " " . $validated->get('car_model') . " (" . $validated->get('car_category') . ")",
+            'name' => $validated->get('lead_name'),
+            'phone' => $validated->get('lead_phone'),
+            'email' => $validated->get('lead_mail')
+        ];
+        event(new OnAddLead($data));
 
         return back()->with('success',__('main.LEAD_CREATED'));
 
