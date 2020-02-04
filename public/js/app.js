@@ -2031,8 +2031,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // get categories of autos from autoria
-      this.makeAjaxCall(this.routeGetCategoriesAuto, 'GET').then(function (responce) {
-        _this.categoriesAutoDropdownList = responce;
+      this.makeAjaxCall(this.routeGetCategoriesAuto, 'GET').then(function (response) {
+        _this.categoriesAutoDropdownList = response;
       });
     },
     getMarks: function getMarks() {
@@ -2044,8 +2044,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.makeAjaxCall(this.routeGetMarks, 'GET', {
         categoryId: this.selectCategory
-      }).then(function (responce) {
-        return _this2.marksDropdownList = responce;
+      }).then(function (response) {
+        return _this2.marksDropdownList = response;
       });
     },
     getModels: function getModels() {
@@ -2058,8 +2058,8 @@ __webpack_require__.r(__webpack_exports__);
       this.makeAjaxCall(this.routeGetModels, 'GET', {
         categoryId: this.selectCategory,
         markId: this.selectMark
-      }).then(function (responce) {
-        return _this3.modelsDropdownList = responce;
+      }).then(function (response) {
+        return _this3.modelsDropdownList = response;
       });
     },
     resetForm: function resetForm() {
@@ -2069,7 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
       this.leadPhoneModel = null;
       this.leadNameModel = null;
       this.leadEmailModel = null;
-      this.Validator.reset;
+      this.Validator.reset();
     }
   },
   created: function created() {
@@ -2141,8 +2141,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.makeAjaxCall(leadObject.destroy_link, 'DELETE', {
         _token: this.token
-      }).then(function (responce) {
-        return _this.leadsDraw = responce.data;
+      }).then(function (response) {
+        return _this.leadsDraw = response.data;
       });
     }
   },
@@ -46098,7 +46098,7 @@ Vue.mixin({
         complete: function complete() {
           return self.isLoading = false;
         },
-        error: function error(reason, xhr) {
+        error: function error(reason) {
           console.log("error in processing your request", reason);
         }
       });
@@ -46113,12 +46113,6 @@ Vue.use(simple_vue_validator__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.component('form-component', __webpack_require__(/*! ./components/FormComponent.vue */ "./resources/js/components/FormComponent.vue")["default"]);
 Vue.component('leads-component', __webpack_require__(/*! ./components/LeadsComponent.vue */ "./resources/js/components/LeadsComponent.vue")["default"]);
 Vue.component('loading', vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new Vue({
   el: '#app'
 });

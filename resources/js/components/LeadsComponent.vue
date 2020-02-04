@@ -50,7 +50,7 @@
             removeLead(leadObject){
 
                 this.makeAjaxCall(leadObject.destroy_link, 'DELETE', {_token: this.token})
-                    .then(responce => this.leadsDraw = responce.data)
+                    .then(response => this.leadsDraw = response.data)
 
             }
         },

@@ -21,7 +21,7 @@
 
 @section('style')
     <style>
-        .pagination{
+        .pagination {
             justify-content: center;
         }
     </style>

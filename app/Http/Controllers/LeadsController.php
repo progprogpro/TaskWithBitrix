@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Bitrix\Leads;
 use App\Events\Bitrix\OnAddLead;
 use App\Http\Requests\SaveLeadRequest;
 use App\Lead;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Exception;
 
 class LeadsController extends Controller
 {
@@ -23,20 +23,19 @@ class LeadsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
         $leads = $this->lead->getLeadsToVue(10);
-
         return view('leads', compact('leads'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param SaveLeadRequest $request
+     * @return RedirectResponse
      */
     public function store(SaveLeadRequest $request)
     {
@@ -55,28 +54,30 @@ class LeadsController extends Controller
             ])->toArray());
 
         $data = [
-            'title' => $validated->get('lead_name') . " add a car:" . $validated->get('car_mark') . " " . $validated->get('car_model') . " (" . $validated->get('car_category') . ")",
+            'title' => $validated->get('lead_name') .
+                " add a car:" . $validated->get('car_mark') .
+                " " . $validated->get('car_model') .
+                " (" . $validated->get('car_category') . ")",
             'name' => $validated->get('lead_name'),
             'phone' => $validated->get('lead_phone'),
             'email' => $validated->get('lead_mail')
         ];
+
         event(new OnAddLead($data));
 
-        return back()->with('success',__('main.LEAD_CREATED'));
-
+        return back()->with('success', __('main.LEAD_CREATED'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Lead $lead
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy(Lead $lead)
     {
         $lead->delete();
-
         return response()->json($lead->getLeadsToVue(10));
-
     }
 }

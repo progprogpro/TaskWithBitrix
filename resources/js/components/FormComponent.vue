@@ -117,8 +117,8 @@
 
                 // get categories of autos from autoria
                 this.makeAjaxCall(this.routeGetCategoriesAuto,'GET')
-                    .then(responce => {
-                        this.categoriesAutoDropdownList = responce;
+                    .then(response => {
+                        this.categoriesAutoDropdownList = response;
                     })
 
             },
@@ -129,7 +129,7 @@
 
                 // get marks of autos from autoria
                 this.makeAjaxCall(this.routeGetMarks,'GET',{categoryId: this.selectCategory})
-                    .then(responce => this.marksDropdownList = responce)
+                    .then(response => this.marksDropdownList = response)
 
             },
             getModels(){
@@ -139,7 +139,7 @@
 
                 // get models of autos from autoria
                 this.makeAjaxCall(this.routeGetModels, 'GET',{categoryId: this.selectCategory, markId: this.selectMark})
-                    .then(responce => this.modelsDropdownList = responce)
+                    .then(response => this.modelsDropdownList = response)
 
             },
             resetForm() {
@@ -152,7 +152,7 @@
                 this.leadNameModel = null;
                 this.leadEmailModel = null;
 
-                this.Validator.reset;
+                this.Validator.reset();
             }
         },
         created(){

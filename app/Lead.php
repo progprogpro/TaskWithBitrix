@@ -28,15 +28,9 @@ class Lead extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y H:i:s');
     }
 
-    public function addAutoriaInfo($data)
-    {
-        $data['lead_id'] = $this->id;
-        return DB::table('autoria_info')->insert($data);
-    }
-
     public function autoria()
     {
-        return $this->hasOne('App\Autoria','lead_id','id');
+        return $this->hasOne('App\Autoria', 'lead_id', 'id');
     }
 
     public function getWithPaginate($paginate)
@@ -47,8 +41,7 @@ class Lead extends Model
     public function getLeadsToVue($paginate)
     {
 
-        foreach($leads = $this->getWithPaginate($paginate) as &$lead)
-        {
+        foreach ($leads = $this->getWithPaginate($paginate) as &$lead) {
             $lead->destroy_link = route('leads.destroy', ['lead' => $lead->id]);
         }
 

@@ -26,7 +26,7 @@ import VueLoading from "vue-loading-overlay";
 import SimpleVueValidation from 'simple-vue-validator';
 
 Vue.mixin({
-    data: function (){
+    data: function () {
         return {
             isLoading: false,
             Validator: SimpleVueValidation.Validator,
@@ -34,8 +34,8 @@ Vue.mixin({
         }
     },
     methods:{
-        makeAjaxCall: function(url, methodType,data){
-            const self = this
+        makeAjaxCall: function (url, methodType,data) {
+            const self = this;
 
             return $.ajax({
                 url : url,
@@ -44,7 +44,7 @@ Vue.mixin({
                 data: data,
                 beforeSend: () => self.isLoading = true,
                 complete: () => self.isLoading = false,
-                error : function (reason, xhr){
+                error : function (reason) {
                     console.log("error in processing your request", reason);
                 }
             });
@@ -55,8 +55,6 @@ Vue.mixin({
     }
 });
 
-
-
 Vue.use(VueLoading);
 Vue.use(SimpleVueValidation);
 
@@ -64,11 +62,6 @@ Vue.component('form-component', require('./components/FormComponent.vue').defaul
 Vue.component('leads-component', require('./components/LeadsComponent.vue').default);
 Vue.component('loading', VueLoading);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#app',
